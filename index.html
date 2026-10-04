@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gerardo Silva | Desenvolvedor Full Stack</title>
+<meta name="description" content="Portfólio de Gerardo Silva, desenvolvedor Full Stack. Projetos, experiência e contato.">
+<link rel="icon" href="./assets/favicon.ico" sizes="any">
+<link rel="icon" type="image/svg+xml" href="./assets/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="./assets/favicon-32.png">
+<link rel="apple-touch-icon" href="./assets/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header><div class="wrap"><nav aria-label="Principal">
+ <a class="logo" href="#inicio">Gerardo Silva</a>
+ <ul class="links-nav" id="menu">
+  <li><a href="#projetos">Projetos</a></li><li><a href="#experiencia">Experiência</a></li>
+  <li><a href="#educacao">Educação</a></li><li><a href="#contato">Contato</a></li>
+ </ul>
+ <div style="display:flex;gap:8px">
+  <button class="icon-btn" id="theme" aria-label="Alternar tema claro e escuro">◐</button>
+  <button class="icon-btn menu" id="burger" aria-label="Abrir menu" aria-expanded="false">☰</button>
+ </div>
+</nav></div></header>
+
+<main>
+<section class="hero" id="inicio"><div class="wrap">
+ <div>
+  <h1>Gerardo Silva</h1>
+  <div class="role" id="role" aria-live="off"></div>
+  <p class="lead">Desenvolvo aplicações web completas, do banco de dados à interface. Aqui estão meus projetos, minha trajetória e a forma mais rápida de falar comigo.</p>
+  <div class="cta">
+   <a class="btn primary" href="#projetos">Ver projetos</a>
+   <a class="btn" href="#contato">Entrar em contato</a>
+   <a class="btn" href="assets/Curriculo - Transicao para Desenvolvimento.pdf" download>Baixar currículo</a>
+  </div>
+ </div>
+ <div class="photo" id="photo">
+  <img src="assets/gerardo.png" alt="Foto de Gerardo Silva" onerror="this.parentNode.classList.add('noimg');this.remove()">
+  <span class="ini" aria-hidden="true">GS</span>
+ </div>
+</div></section>
+
+<section id="projetos"><div class="wrap">
+ <h2>Projetos</h2><p class="sub">Aplicações que construí de ponta a ponta. Filtre por tecnologia.</p>
+ <div class="chips filters" id="filters" role="group" aria-label="Filtrar projetos"></div>
+ <div class="grid" id="projects"></div>
+</div></section>
+
+<section id="experiencia"><div class="wrap">
+ <h2>Experiência profissional</h2><p class="sub">Onde trabalhei e o que entreguei.</p>
+ <div class="timeline" id="exp"></div>
+</div></section>
+
+<section id="educacao"><div class="wrap two">
+ <div><h2>Educação</h2><p class="sub">Formação e cursos.</p><div class="timeline" id="edu"></div></div>
+ <div><h2>Tecnologias</h2><p class="sub">Com o que trabalho no dia a dia.</p><div class="stack" id="stack"></div></div>
+</div></section>
+
+<section id="competencias"><div class="wrap">
+ <h2>Competências</h2><p class="sub">Conhecimento de negócio e de operação que levo para o desenvolvimento, principalmente de sistemas financeiros.</p>
+ <div class="stack cols" id="skills-list"></div>
+</div></section>
+
+<section id="soft"><div class="wrap">
+ <h2>Soft skills</h2><p class="sub">O que levo da minha trajetória para dentro de um time de tecnologia.</p>
+ <div class="grid soft" id="soft-list"></div>
+</div></section>
+
+<section id="contato"><div class="wrap">
+ <h2>Contato</h2><p class="sub">Tem uma vaga ou projeto em mente? Envie uma mensagem e respondo em até 2 dias úteis.</p>
+ <form id="form" novalidate>
+  <label>Nome<input name="nome" autocomplete="name" required><span class="err"></span></label>
+  <label>E-mail<input name="email" type="email" autocomplete="email" required><span class="err"></span></label>
+  <label>Mensagem<textarea name="msg" rows="5" required minlength="10"></textarea><span class="err"></span></label>
+  <input class="hp" name="site" tabindex="-1" autocomplete="off" aria-hidden="true">
+  <div><button class="btn primary" type="submit" id="send">Enviar mensagem</button></div>
+  <div id="status" role="status"></div>
+ </form>
+</div></section>
+</main>
+
+<footer><div class="wrap"><span>© <span id="year"></span> Gerardo Silva</span>
+ <span><a href="https://br.linkedin.com/in/gerardo-alexander-silva-de-nicolais-255763271" target="_blank" rel="noopener">LinkedIn</a></span></div></footer>
+
+<script src="script.js"></script>
+</body>
+</html>
