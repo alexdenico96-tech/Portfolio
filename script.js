@@ -30,7 +30,7 @@ const PROJECTS = [
     t: "UGC Studio",
     d: "Ferramenta para criadores de conteúdo gerenciarem campanhas, acompanharem os ganhos mês a mês em um dashboard, organizarem tarefas estilo kanban e criarem roteiros.",
     s: ["React", "Vite", "PostgreSQL"],
-    demo: "https://ugc-studio-cdwk.onrender.com/#/login",
+    demo: "https://ugc-studio-by71.vercel.app/#/login",
   },
 ];
 const EXP = [
