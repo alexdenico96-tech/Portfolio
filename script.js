@@ -23,13 +23,13 @@ const PROJECTS = [
   {
     t: "Kira — Chat com IA",
     d: "Interface de chat com login e histórico de conversas isolado por usuário. Faz busca na web em tempo real via Groq e mostra o que a IA pesquisou antes de responder.",
-    s: ["Full Stack", "Groq"],
+    s: ["Full Stack", "Groq", "Gemini"],
     demo: "https://kira-agqc.onrender.com/",
   },
   {
     t: "UGC Studio",
     d: "Ferramenta para criadores de conteúdo gerenciarem campanhas, acompanharem os ganhos mês a mês em um dashboard, organizarem tarefas estilo kanban e criarem roteiros.",
-    s: ["React", "Vite", "PostgreSQL"],
+    s: ["React", "Vite", "PostgreSQL", "TypeScript"],
     demo: "https://ugc-studio-by71.vercel.app/#/login",
   },
 ];
