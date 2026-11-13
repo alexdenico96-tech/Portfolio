@@ -26,6 +26,16 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
+    <!-- Fundo animado -->
+    <div class="bg" aria-hidden="true">
+      <div class="blob b1"></div>
+      <div class="blob b2"></div>
+      <div class="blob b3"></div>
+      <div class="grid-bg"></div>
+      <canvas id="particles"></canvas>
+    </div>
+    <div class="progress" id="progress" aria-hidden="true"></div>
+
     <header>
       <div class="wrap">
         <nav aria-label="Principal">
@@ -60,17 +70,19 @@
     <main>
       <section class="hero" id="inicio">
         <div class="wrap">
-          <div>
-            <h1>Gerardo Silva</h1>
-            <div class="role" id="role" aria-live="off"></div>
-            <p class="lead">
+          <div class="hero-text">
+            <span class="badge reveal"><span class="dot"></span>Disponível para novas oportunidades</span>
+            <h1 class="reveal" style="--d: 1">Gerardo <span class="grad">Silva</span></h1>
+            <div class="role reveal" style="--d: 2" id="role" aria-live="off"></div>
+            <p class="lead reveal" style="--d: 3">
               Desenvolvo aplicações web completas, do banco de dados à
               interface. Aqui estão meus projetos, minha trajetória e a forma
               mais rápida de falar comigo.
             </p>
-            <div class="cta">
+            <div class="cta reveal" style="--d: 4">
               <a class="btn primary" href="#projetos">Ver projetos</a>
               <a class="btn" href="#contato">Entrar em contato</a>
+              <a class="btn wa" id="wa-hero" href="#" target="_blank" rel="noopener"><svg viewBox="0 0 32 32" aria-hidden="true"><use href="#wa" /></svg>WhatsApp</a>
               <a
                 class="btn"
                 href="assets/Curriculo Gerardo Alexander - Transicao Desenvolvedor .pdf"
@@ -79,7 +91,7 @@
               >
             </div>
           </div>
-          <div class="photo" id="photo">
+          <div class="photo reveal zoom" style="--d: 2" id="photo">
             <img
               src="assets/gerardo.png"
               alt="Foto de Gerardo Silva"
@@ -95,8 +107,8 @@
 
       <section id="projetos">
         <div class="wrap">
-          <h2>Projetos</h2>
-          <p class="sub">
+          <h2 class="reveal">Projetos</h2>
+          <p class="sub reveal" style="--d: 1">
             Aplicações que construí de ponta a ponta. Filtre por tecnologia.
           </p>
           <div
@@ -111,8 +123,8 @@
 
       <section id="experiencia">
         <div class="wrap">
-          <h2>Experiência profissional</h2>
-          <p class="sub">Onde trabalhei e o que entreguei.</p>
+          <h2 class="reveal">Experiência profissional</h2>
+          <p class="sub reveal" style="--d: 1">Onde trabalhei e o que entreguei.</p>
           <div class="timeline" id="exp"></div>
         </div>
       </section>
@@ -120,13 +132,13 @@
       <section id="educacao">
         <div class="wrap two">
           <div>
-            <h2>Educação</h2>
-            <p class="sub">Formação e cursos.</p>
+            <h2 class="reveal">Educação</h2>
+            <p class="sub reveal" style="--d: 1">Formação e cursos.</p>
             <div class="timeline" id="edu"></div>
           </div>
           <div>
-            <h2>Tecnologias</h2>
-            <p class="sub">Com o que trabalho no dia a dia.</p>
+            <h2 class="reveal">Tecnologias</h2>
+            <p class="sub reveal" style="--d: 1">Com o que trabalho no dia a dia.</p>
             <div class="stack" id="stack"></div>
           </div>
         </div>
@@ -134,8 +146,8 @@
 
       <section id="competencias">
         <div class="wrap">
-          <h2>Competências</h2>
-          <p class="sub">
+          <h2 class="reveal">Competências</h2>
+          <p class="sub reveal" style="--d: 1">
             Conhecimento de negócio e de operação que levo para o
             desenvolvimento, principalmente de sistemas financeiros.
           </p>
@@ -145,8 +157,8 @@
 
       <section id="soft">
         <div class="wrap">
-          <h2>Soft skills</h2>
-          <p class="sub">
+          <h2 class="reveal">Soft skills</h2>
+          <p class="sub reveal" style="--d: 1">
             O que levo da minha trajetória para dentro de um time de tecnologia.
           </p>
           <div class="grid soft" id="soft-list"></div>
@@ -155,12 +167,13 @@
 
       <section id="contato">
         <div class="wrap">
-          <h2>Contato</h2>
-          <p class="sub">
+          <h2 class="reveal">Contato</h2>
+          <p class="sub reveal" style="--d: 1">
             Tem uma vaga ou projeto em mente? Envie uma mensagem e respondo em
             até 2 dias úteis.
           </p>
-          <form id="form" novalidate>
+          <div class="contact-grid">
+          <form id="form" class="reveal" style="--d: 2" novalidate>
             <label
               >Nome<input name="nome" autocomplete="name" required /><span
                 class="err"
@@ -196,6 +209,21 @@
             </div>
             <div id="status" role="status"></div>
           </form>
+          <aside class="wa-card reveal" style="--d: 3">
+            <div class="wa-icon" aria-hidden="true">
+              <svg viewBox="0 0 32 32"><use href="#wa" /></svg>
+            </div>
+            <h3>Prefere conversar agora?</h3>
+            <p>
+              Me chame no WhatsApp para uma resposta mais rápida sobre vagas,
+              projetos ou dúvidas.
+            </p>
+            <a class="btn wa" id="wa-contact" href="#" target="_blank" rel="noopener">
+              <svg viewBox="0 0 32 32" aria-hidden="true"><use href="#wa" /></svg>
+              Chamar no WhatsApp
+            </a>
+          </aside>
+          </div>
         </div>
       </section>
     </main>
@@ -213,6 +241,17 @@
         >
       </div>
     </footer>
+
+    <a class="wa-float" id="wa-float" href="#" target="_blank" rel="noopener" aria-label="Conversar no WhatsApp">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><use href="#wa" /></svg>
+      <span class="wa-tip">Fale comigo no WhatsApp</span>
+    </a>
+
+    <svg width="0" height="0" style="position: absolute" aria-hidden="true">
+      <symbol id="wa" viewBox="0 0 32 32">
+        <path fill="currentColor" d="M16.04 3C8.86 3 3.03 8.82 3.03 16c0 2.29.6 4.53 1.74 6.5L3 29l6.68-1.75A12.96 12.96 0 0 0 16.04 29C23.2 29 29 23.18 29 16S23.2 3 16.04 3Zm0 23.62c-2 0-3.96-.54-5.67-1.55l-.4-.24-3.97 1.04 1.06-3.87-.26-.4A10.6 10.6 0 0 1 5.4 16c0-5.87 4.77-10.63 10.64-10.63 5.86 0 10.6 4.76 10.6 10.63 0 5.86-4.75 10.62-10.6 10.62Zm5.83-7.96c-.32-.16-1.89-.93-2.18-1.04-.3-.1-.5-.16-.72.16-.21.32-.82 1.04-1 1.25-.19.21-.37.24-.69.08-.32-.16-1.35-.5-2.57-1.59-.95-.85-1.59-1.9-1.78-2.21-.18-.32-.02-.5.14-.65.15-.14.32-.37.48-.56.16-.19.21-.32.32-.53.1-.21.05-.4-.03-.56-.08-.16-.72-1.73-.98-2.37-.26-.62-.52-.54-.72-.55h-.61c-.21 0-.56.08-.85.4-.29.32-1.11 1.09-1.11 2.65 0 1.57 1.14 3.08 1.3 3.3.16.2 2.24 3.42 5.43 4.8.76.33 1.35.52 1.81.67.76.24 1.45.2 2 .12.61-.09 1.89-.77 2.15-1.52.27-.74.27-1.38.19-1.52-.08-.13-.29-.21-.61-.37Z"/>
+      </symbol>
+    </svg>
 
     <script src="script.js"></script>
   </body>

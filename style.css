@@ -429,3 +429,738 @@ footer .wrap {
   font-size: 1.05rem;
   margin-bottom: 12px;
 }
+
+/* =========================================================
+   MODERNIZAÇÃO — fundo animado, revelação ao rolar, WhatsApp
+   ========================================================= */
+:root {
+  --accent-2: #9b5cff;
+  --accent-3: #00c2d1;
+  --wa: #25d366;
+  --wa-dark: #128c7e;
+  --glass: color-mix(in srgb, var(--surface) 72%, transparent);
+  --glow: color-mix(in srgb, var(--accent) 35%, transparent);
+  --blob-opacity: 0.45;
+}
+:root[data-theme="dark"] {
+  --bg: #070b18;
+  --surface: #11182c;
+  --line: #222c48;
+  --accent-2: #b48cff;
+  --accent-3: #33e1ee;
+  --glass: color-mix(in srgb, var(--surface) 62%, transparent);
+  --blob-opacity: 0.38;
+}
+body {
+  overflow-x: hidden;
+  transition: background 0.4s, color 0.4s;
+}
+main,
+footer {
+  position: relative;
+  z-index: 1;
+}
+header {
+  z-index: 10;
+  background: color-mix(in srgb, var(--bg) 70%, transparent);
+}
+
+/* ---------- Fundo em movimento ---------- */
+.bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+.blob {
+  position: absolute;
+  width: 46vmax;
+  height: 46vmax;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: var(--blob-opacity);
+  will-change: transform;
+}
+.b1 {
+  background: radial-gradient(circle, var(--accent) 0%, transparent 65%);
+  top: -14vmax;
+  left: -10vmax;
+  animation: float1 22s ease-in-out infinite alternate;
+}
+.b2 {
+  background: radial-gradient(circle, var(--accent-2) 0%, transparent 65%);
+  top: 30%;
+  right: -16vmax;
+  animation: float2 26s ease-in-out infinite alternate;
+}
+.b3 {
+  background: radial-gradient(circle, var(--accent-3) 0%, transparent 65%);
+  bottom: -18vmax;
+  left: 20%;
+  animation: float3 30s ease-in-out infinite alternate;
+}
+@keyframes float1 {
+  to { transform: translate(28vw, 22vh) scale(1.2); }
+}
+@keyframes float2 {
+  to { transform: translate(-30vw, -18vh) scale(0.85); }
+}
+@keyframes float3 {
+  to { transform: translate(18vw, -30vh) scale(1.15); }
+}
+.grid-bg {
+  position: absolute;
+  inset: -64px;
+  background-image:
+    linear-gradient(var(--line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--line) 1px, transparent 1px);
+  background-size: 64px 64px;
+  opacity: 0.35;
+  mask-image: radial-gradient(ellipse at 50% 30%, #000 10%, transparent 70%);
+  -webkit-mask-image: radial-gradient(ellipse at 50% 30%, #000 10%, transparent 70%);
+  animation: gridmove 18s linear infinite;
+}
+@keyframes gridmove {
+  to { transform: translate(64px, 64px); }
+}
+#particles {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* Barra de progresso de leitura */
+.progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  width: 100%;
+  z-index: 20;
+  transform-origin: 0 50%;
+  transform: scaleX(0);
+  background: linear-gradient(90deg, var(--accent), var(--accent-2), var(--accent-3));
+}
+
+/* ---------- Hero ---------- */
+.hero {
+  min-height: calc(100vh - 60px);
+  display: flex;
+  align-items: center;
+}
+.hero .wrap {
+  width: 100%;
+}
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  border-radius: 99px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--muted);
+  background: var(--glass);
+  border: 1px solid var(--line);
+  backdrop-filter: blur(8px);
+  margin-bottom: 18px;
+}
+.badge .dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--wa);
+  box-shadow: 0 0 0 0 var(--wa);
+  animation: ping 2s infinite;
+}
+@keyframes ping {
+  70% { box-shadow: 0 0 0 8px transparent; }
+  100% { box-shadow: 0 0 0 0 transparent; }
+}
+.grad {
+  background: linear-gradient(110deg, var(--accent), var(--accent-2), var(--accent-3), var(--accent));
+  background-size: 300% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: shine 8s linear infinite;
+}
+@keyframes shine {
+  to { background-position: 300% 0; }
+}
+.photo {
+  box-shadow: none;
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  isolation: isolate;
+  overflow: visible;
+  border-radius: 32px;
+  animation: bob 6s ease-in-out infinite;
+}
+.photo img {
+  border-radius: 32px;
+  position: relative;
+  z-index: 1;
+}
+.photo::before {
+  content: "";
+  position: absolute;
+  inset: -3px;
+  border-radius: 35px;
+  background: conic-gradient(from var(--ang, 0deg), var(--accent), var(--accent-2), var(--accent-3), var(--accent));
+  z-index: -1;
+  animation: spin 6s linear infinite;
+}
+.photo::after {
+  content: "";
+  position: absolute;
+  inset: 10%;
+  border-radius: 50%;
+  background: var(--glow);
+  filter: blur(50px);
+  z-index: -2;
+}
+@property --ang {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+@keyframes spin {
+  to { --ang: 360deg; }
+}
+@keyframes bob {
+  50% { transform: translateY(-10px); }
+}
+
+/* ---------- Botões ---------- */
+.btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--glass);
+  backdrop-filter: blur(8px);
+  transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s;
+  overflow: hidden;
+}
+.btn:hover {
+  filter: none;
+  transform: translateY(-2px);
+  border-color: var(--accent);
+  box-shadow: 0 10px 28px -10px var(--glow);
+}
+.btn.primary {
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  border-color: transparent;
+}
+.btn.primary::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(120deg, transparent 30%, rgba(255, 255, 255, 0.35) 50%, transparent 70%);
+  transform: translateX(-100%);
+  transition: transform 0.6s;
+}
+.btn.primary:hover::after {
+  transform: translateX(100%);
+}
+.btn svg {
+  width: 20px;
+  height: 20px;
+  flex: none;
+}
+.btn.wa {
+  background: var(--wa);
+  border-color: var(--wa);
+  color: #fff;
+}
+.btn.wa:hover {
+  border-color: var(--wa);
+  box-shadow: 0 10px 28px -8px color-mix(in srgb, var(--wa) 70%, transparent);
+}
+
+/* ---------- Cartões ---------- */
+.card {
+  background: var(--glass);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  position: relative;
+  transition: transform 0.35s, box-shadow 0.35s, border-color 0.35s;
+  transform-style: preserve-3d;
+}
+.card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  background: radial-gradient(400px circle at var(--mx, 50%) var(--my, 50%), color-mix(in srgb, var(--accent) 16%, transparent), transparent 45%);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.card:hover {
+  border-color: color-mix(in srgb, var(--accent) 55%, var(--line));
+  box-shadow: 0 18px 40px -18px var(--glow);
+}
+.card:hover::before {
+  opacity: 1;
+}
+.soft .card {
+  border-top: 1px solid var(--line);
+}
+.soft .card::after {
+  content: "";
+  position: absolute;
+  top: -1px;
+  left: 22px;
+  right: 22px;
+  height: 3px;
+  border-radius: 0 0 3px 3px;
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+}
+.chip {
+  background: var(--glass);
+  transition: transform 0.2s, border-color 0.2s, color 0.2s;
+}
+.chips .chip:hover {
+  transform: translateY(-2px);
+  border-color: var(--accent);
+  color: var(--ink);
+}
+button.chip[aria-pressed="true"] {
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  border-color: transparent;
+}
+
+/* Timeline */
+.timeline {
+  border-left: none;
+  position: relative;
+}
+.timeline::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 2px;
+  height: 100%;
+  background: linear-gradient(var(--accent), var(--accent-2), transparent);
+  transform-origin: top;
+  transform: scaleY(var(--grow, 0));
+  transition: transform 1.4s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.timeline.in {
+  --grow: 1;
+}
+.item::before {
+  left: -34px;
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 22%, transparent);
+}
+
+/* Inputs */
+input,
+textarea {
+  background: var(--glass);
+  backdrop-filter: blur(8px);
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+input:focus,
+textarea:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 20%, transparent);
+}
+
+/* Contato */
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 32px;
+  align-items: start;
+}
+.contact-grid form {
+  max-width: none;
+}
+.wa-card {
+  padding: 28px;
+  border-radius: 18px;
+  border: 1px solid color-mix(in srgb, var(--wa) 40%, var(--line));
+  background:
+    radial-gradient(circle at 100% 0%, color-mix(in srgb, var(--wa) 18%, transparent), transparent 60%),
+    var(--glass);
+  backdrop-filter: blur(12px);
+  display: grid;
+  gap: 12px;
+  justify-items: start;
+}
+.wa-card p {
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+.wa-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+  display: grid;
+  place-items: center;
+  background: var(--wa);
+  color: #fff;
+}
+.wa-icon svg {
+  width: 30px;
+  height: 30px;
+}
+
+/* Botão flutuante */
+.wa-float {
+  position: fixed;
+  right: 22px;
+  bottom: 22px;
+  z-index: 30;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: var(--wa);
+  color: #fff;
+  box-shadow: 0 10px 30px -6px rgba(37, 211, 102, 0.6);
+  transform: scale(0);
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.wa-float.show {
+  transform: scale(1);
+}
+.wa-float:hover {
+  transform: scale(1.08);
+}
+.wa-float svg {
+  width: 32px;
+  height: 32px;
+}
+.wa-float::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: var(--wa);
+  z-index: -1;
+  animation: wave 2.4s ease-out infinite;
+}
+@keyframes wave {
+  to { transform: scale(1.7); opacity: 0; }
+}
+.wa-tip {
+  position: absolute;
+  right: 74px;
+  white-space: nowrap;
+  background: var(--surface);
+  color: var(--ink);
+  border: 1px solid var(--line);
+  padding: 8px 14px;
+  border-radius: 10px;
+  font-size: 0.88rem;
+  font-weight: 500;
+  box-shadow: 0 8px 24px -10px rgba(0, 0, 0, 0.3);
+  opacity: 0;
+  transform: translateX(8px);
+  transition: opacity 0.25s, transform 0.25s;
+  pointer-events: none;
+}
+.wa-float:hover .wa-tip,
+.wa-float:focus-visible .wa-tip {
+  opacity: 1;
+  transform: none;
+}
+
+/* ---------- Revelação ao rolar ---------- */
+.js .reveal {
+  opacity: 0;
+  transform: translateY(32px);
+  filter: blur(6px);
+  transition:
+    opacity 0.8s cubic-bezier(0.2, 0.7, 0.2, 1),
+    transform 0.8s cubic-bezier(0.2, 0.7, 0.2, 1),
+    filter 0.8s ease;
+  transition-delay: calc(var(--d, 0) * 110ms);
+}
+.js .reveal.zoom {
+  transform: scale(0.88);
+}
+.js .reveal.left {
+  transform: translateX(-36px);
+}
+.js .reveal.in {
+  opacity: 1;
+  transform: none;
+  filter: none;
+}
+/* depois de aparecer, o hover dos cartões volta a ser rápido */
+.js .reveal.in.done {
+  transition-delay: 0s;
+  transition-duration: 0.35s;
+}
+
+footer {
+  background: color-mix(in srgb, var(--bg) 60%, transparent);
+  backdrop-filter: blur(8px);
+}
+
+@media (max-width: 760px) {
+  .contact-grid {
+    grid-template-columns: 1fr;
+  }
+  .hero {
+    min-height: auto;
+    padding-top: 40px;
+  }
+  .wa-float {
+    right: 16px;
+    bottom: 16px;
+    width: 56px;
+    height: 56px;
+  }
+  .wa-tip {
+    display: none;
+  }
+  .blob {
+    filter: blur(60px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .blob,
+  .grid-bg,
+  .grad,
+  .photo,
+  .photo::before,
+  .badge .dot,
+  .wa-float::before {
+    animation: none !important;
+  }
+  .js .reveal {
+    opacity: 1;
+    transform: none;
+    filter: none;
+    transition: none;
+  }
+  .timeline::before {
+    transform: none;
+    transition: none;
+  }
+  #particles {
+    display: none;
+  }
+}
+
+/* =========================================================
+   TIMELINE — bolinhas com movimento
+   ========================================================= */
+.item::before {
+  z-index: 1;
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  animation: dotGlow 3s ease-in-out infinite;
+  animation-delay: calc(var(--d, 0) * 0.4s);
+  transition: transform 0.3s;
+}
+.item::after {
+  content: "";
+  position: absolute;
+  left: -36px;
+  top: 7px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 2px solid var(--accent);
+  pointer-events: none;
+  animation: ring 3s ease-out infinite;
+  animation-delay: calc(var(--d, 0) * 0.4s);
+}
+@keyframes dotGlow {
+  0%, 100% { box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 22%, transparent), 0 0 0 transparent; }
+  50% { box-shadow: 0 0 0 6px color-mix(in srgb, var(--accent-2) 28%, transparent), 0 0 18px var(--accent); }
+}
+@keyframes ring {
+  0% { transform: scale(1); opacity: 0.9; }
+  70%, 100% { transform: scale(2.6); opacity: 0; }
+}
+.item:hover::before {
+  transform: scale(1.35);
+}
+/* emprego / curso atual em verde, com pulso mais forte */
+.item.now::before {
+  background: var(--wa);
+  animation-name: dotNow;
+}
+.item.now::after {
+  border-color: var(--wa);
+  animation-duration: 1.8s;
+}
+@keyframes dotNow {
+  0%, 100% { box-shadow: 0 0 0 4px rgba(37, 211, 102, 0.25); }
+  50% { box-shadow: 0 0 0 6px rgba(37, 211, 102, 0.3), 0 0 18px var(--wa); }
+}
+/* um brilho que percorre a linha do tempo */
+.timeline::after {
+  content: "";
+  position: absolute;
+  left: -3px;
+  top: 0;
+  width: 8px;
+  height: 60px;
+  border-radius: 8px;
+  background: linear-gradient(transparent, var(--accent-3), transparent);
+  filter: blur(1px);
+  opacity: 0;
+  animation: travel 5s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+  animation-play-state: paused;
+}
+.timeline.in::after {
+  animation-play-state: running;
+}
+@keyframes travel {
+  0% { top: 0; opacity: 0; }
+  10% { opacity: 1; }
+  85% { opacity: 1; }
+  100% { top: calc(100% - 60px); opacity: 0; }
+}
+
+/* =========================================================
+   PROJETOS — código rolando no fundo
+   ========================================================= */
+.card.proj {
+  overflow: hidden;
+  isolation: isolate;
+}
+.card.proj > :not(.code-bg) {
+  position: relative;
+  z-index: 1;
+}
+.code-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+  opacity: 0.13;
+  transition: opacity 0.4s;
+  mask-image: linear-gradient(to bottom, transparent, #000 18%, #000 60%, transparent);
+  -webkit-mask-image: linear-gradient(to bottom, transparent, #000 18%, #000 60%, transparent);
+}
+.code-bg pre {
+  margin: 0;
+  padding: 18px 22px;
+  font: 500 12.5px/1.75 ui-monospace, "JetBrains Mono", "Fira Code", Menlo, Consolas, monospace;
+  color: var(--muted);
+  white-space: pre;
+  animation: codeScroll var(--speed, 24s) linear infinite;
+}
+@keyframes codeScroll {
+  to { transform: translateY(-50%); }
+}
+.code-bg .kw { color: var(--accent-2); }
+.code-bg .st { color: var(--ok); }
+.code-bg .fn { color: var(--accent-3); }
+.code-bg .cm { color: var(--muted); font-style: italic; opacity: 0.8; }
+.card.proj:hover .code-bg {
+  opacity: 0.24;
+}
+.card.proj:hover .code-bg pre {
+  animation-duration: calc(var(--speed, 24s) / 2.5);
+}
+/* fundo do texto um pouco mais sólido para manter a leitura */
+.card.proj p {
+  text-shadow: 0 0 12px var(--surface), 0 0 4px var(--surface);
+}
+
+/* =========================================================
+   SOFT SKILLS — ícone temático no fundo
+   ========================================================= */
+.card.skill {
+  overflow: hidden;
+  isolation: isolate;
+  background:
+    radial-gradient(color-mix(in srgb, var(--accent) 22%, transparent) 1px, transparent 1.4px) 0 0 / 16px 16px,
+    var(--glass);
+}
+.card.skill > h3,
+.card.skill > p,
+.card.skill > .sk-badge {
+  position: relative;
+  z-index: 1;
+}
+.sk-badge {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+  color: #fff;
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  box-shadow: 0 8px 20px -8px var(--glow);
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.sk-ico {
+  width: 24px;
+  height: 24px;
+}
+.card.skill:hover .sk-badge {
+  transform: rotate(-8deg) scale(1.1);
+}
+.sk-bg {
+  position: absolute;
+  right: -26px;
+  bottom: -30px;
+  width: 170px;
+  height: 170px;
+  z-index: 0;
+  color: var(--accent);
+  opacity: 0.13;
+  stroke-width: 0.9;
+  pointer-events: none;
+  animation: drift 9s ease-in-out infinite;
+  transition: opacity 0.4s, color 0.4s;
+}
+.card.skill:nth-child(2n) .sk-bg { animation-duration: 11s; color: var(--accent-2); }
+.card.skill:nth-child(3n) .sk-bg { animation-duration: 13s; color: var(--accent-3); }
+@keyframes drift {
+  0%, 100% { transform: rotate(-12deg) translate(0, 0); }
+  50% { transform: rotate(-4deg) translate(-8px, -10px); }
+}
+.card.skill:hover .sk-bg {
+  opacity: 0.28;
+}
+/* o ícone se "desenha" quando o cartão aparece */
+.sk-bg path,
+.sk-bg circle,
+.sk-bg rect {
+  stroke-dasharray: 120;
+  stroke-dashoffset: 120;
+  transition: stroke-dashoffset 2.2s ease 0.3s;
+}
+.card.skill.in .sk-bg path,
+.card.skill.in .sk-bg circle,
+.card.skill.in .sk-bg rect {
+  stroke-dashoffset: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .item::before,
+  .item::after,
+  .timeline::after,
+  .code-bg pre,
+  .sk-bg {
+    animation: none !important;
+  }
+  .item::after,
+  .timeline::after {
+    display: none;
+  }
+  .sk-bg path,
+  .sk-bg circle,
+  .sk-bg rect {
+    stroke-dashoffset: 0;
+    transition: none;
+  }
+}
